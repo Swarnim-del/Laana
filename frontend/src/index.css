@@ -11335,4 +11335,35 @@ h2{
 .rating span{
   color:gold;
 }
+.rating span.last{
+  color:#000;
+}
+.status,.success{
+  color:green;
+}
+.status,.danger{
+  color:var(--bs-red);
+}
+/* .main{
+  background-color:#FFF1E8;
+}
+.py-5{
+  background-color:#FFF1E8
+} */
+.alert{
+  margin: 0.5rem;
+  padding: 1rem;
+  border: 0.1rem solid transparent;
+  border-radius: 0.5rem;
+}
+.alert-info{
+  color: #043974;
+  background-color:#FFF6FD ;
+}
+.alert-danger{
+  color: #6F2357;
+  background-color:#E7DFF2 ;
+}
+
+
 

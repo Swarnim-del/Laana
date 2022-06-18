@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
 
-export default class navbar extends Component {
-  render() {
-    return (
-      <div>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+import React from 'react'
+
+export default function navbar() {
+  return (
+    <div>
+      {/* <section className="navbar"> */}
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container px-4 px-lg-5">
         <img src="/images/logo.jfif" width="35 px" height="25 px" alt="" />
         <a className="navbar-brand" href="/">Laana</a>
@@ -70,7 +71,8 @@ export default class navbar extends Component {
         </div>
       </div>
     </nav>
-      </div>
-    )
-  }
+    {/* </section> */}
+    </div>
+  )
 }
+

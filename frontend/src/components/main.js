@@ -1,80 +1,50 @@
-import React, { Component } from 'react'
-import data from './data'
-export default class main extends Component {
-  render() {
-    return (
-      <div>
+import Rating from "./rating";
+import React, { useEffect} from "react";
+
+import MessageBox from './messagebox';
+import Loadingbox from './loadingbox';
+import {useSelector,useDispatch} from 'react-redux';
+import {listProducts} from '../actions/productActions'
+
+export default function main() {
+  const dispatch= useDispatch();
+  const productList =useSelector((state)=>state.productList);
+  const {loading,error,products}=productList;
+
+  useEffect(() => {
+    dispatch(listProducts());
+  }, [dispatch]);
+
+  return (
+    <div>
+      {loading ? (
+        <Loadingbox></Loadingbox>
+      ) : error ? (
+        <MessageBox variant="danger">{error}</MessageBox>
+      ) : (
         <section className="main">
-
-      <div className="row-center">
-          {
-            data.products.map(product=>(
+          <div className="row-center">
+            {products.map((product) => (
               <div key={product._id} className="item">
-              <a href={`/product/${product._id}`}>
-                <img src={product.image} alt={product.name} />
-              </a>
-              <div className="item-body">
-              <a href={`/product/${product._id}`}>
-                  <h2>{product.name}</h2>
+                <a href={`/product/${product._id}`}>
+                  <img src={product.image} alt={product.name} />
                 </a>
-                <div className="rating">
-                  <span>
-                    <i className="fa fa-star"></i>
-                  </span>
-                  <span>
-                    <i className="fa fa-star"></i>
-                  </span>
-                  <span>
-                    <i className="fa fa-star"></i>
-                  </span>
-                  <span>
-                    <i className="fa fa-star"></i>
-                  </span>
-                  <span>
-                    <i className="fa fa-star"></i>
-                  </span>
+                <div className="item-body">
+                  <a href={`/product/${product._id}`}>
+                    <h2>{product.name}</h2>
+                  </a>
+                  <Rating
+                    rating={product.rating}
+                    numReviews={product.numReviews}
+                  />
+                  <div className="price">${product.price}</div>
                 </div>
-                <div className="price">${product.price}</div>
               </div>
-            </div>
-            ))
-          }
-
-        <div className="item">
-          <a href="product.html">
-            <img src="/images/item1.jpg" alt="" />
-          </a>
-          <div className="item-body">
-            <a href="product.html">
-              <h2>Nike Sports Wear</h2>
-            </a>
-            <div className="rating">
-              <span>
-                <i className="fa fa-star"></i>
-              </span>
-              <span>
-                <i className="fa fa-star"></i>
-              </span>
-              <span>
-                <i className="fa fa-star"></i>
-              </span>
-              <span>
-                <i className="fa fa-star"></i>
-              </span>
-              <span>
-                <i className="fa fa-star"></i>
-              </span>
-            </div>
-            <div className="price">$120</div>
+            ))}
           </div>
-        </div>
-        
-      </div>
-      {/* <!-- <div className="itme-content">
-                <h2>Nike T Shirts</h2>
-            </div> */}
-    </section>
-      </div>
-    )
-  }
+          
+        </section>
+      )}
+    </div>
+  );
 }
